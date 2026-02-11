@@ -1,0 +1,19 @@
+
+{
+  "manifest_version": 3,
+  "name": "Telecom Templates Pro",
+  "version": "1.0.2",
+  "description": "Quick-access support templates in Arabic and English for Telecom agents.",
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "Telecom Templates"
+  },
+  "side_panel": {
+    "default_path": "index.html"
+  },
+  "permissions": [
+    "storage",
+    "clipboardWrite",
+    "sidePanel"
+  ]
+}
