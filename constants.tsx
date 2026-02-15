@@ -2,11 +2,11 @@
 import { Category, Template } from './types';
 
 export const TEMPLATES: Template[] = [
-  // --- GREETINGS ---
+  // --- GREETINGS & OPENINGS (1.x & 2.x) ---
   {
     id: 'g_1',
     category: Category.Greetings,
-    title: { en: '2.0 Opening', ar: '1.0 تحية' },
+    title: { en: 'Standard Opening', ar: '1.0 تحية افتتاحية' },
     content: {
       en: "Hi 🤝, welcome to Jawwy from stc, Kindly provide us your name and how may I assist you?",
       ar: "حياك الله 🤝 في جوّي من stc، شرفنا باسمك و كيف أقدر أساعدك؟"
@@ -16,32 +16,62 @@ export const TEMPLATES: Template[] = [
   {
     id: 'g_2',
     category: Category.Greetings,
-    title: { en: 'Salam Greeting', ar: '1.1 سلام' },
+    title: { en: 'Salam Greeting', ar: '1.1 تحية السلام' },
     content: {
       en: "Hi 🤝, welcome to Jawwy from stc, Kindly provide us your name and how may I assist you?",
       ar: "وعليكم السلام ورحمة الله وبركاته🤝 في جوّي من stc، شرفنا باسمك و كيف أقدر أساعدك؟"
     },
-    tags: ['greeting', 'salam']
+    tags: ['salam', 'greeting']
   },
   {
     id: 'g_3',
     category: Category.Greetings,
-    title: { en: 'Opening + Number', ar: '1.2 سلام وجوال' },
+    title: { en: 'Opening + Phone', ar: '1.2 سلام ورقم الجوال' },
     content: {
-      en: "Hi 🤝, welcome to Jawwy from stc, Kindly provide us your phone number.",
-      ar: "وعليكم السلام ورحمة الله وبركاته🤝 في جوّي من stc، ولا عليك امر تزودنا برقم الجوال ."
+      en: "Hi 🤝, welcome to Jawwy from stc. Rest assured that I will do my best to resolve the issue. 👍🏼 Kindly provide us your phone number (preferably starting with 966).",
+      ar: "وعليكم السلام ورحمة الله وبركاته🤝 مرحباً يا الغالي، وشكراً لتواصلك مع جوّي من stc. نعتذر منك على اللي صار معك 🙏 راح نسوي أفضل ما عندنا لمساعدتك، من فضلك يا ليت تزودنا بالرقم اللي تواجهك إشكالية فيه (يفضل يبدأ بـ 966)."
     },
-    tags: ['greeting', 'phone']
+    tags: ['phone', 'opening']
   },
   {
     id: 'g_4',
     category: Category.Greetings,
-    title: { en: 'Opening + Validation', ar: '1.4 سلام وهوية' },
+    title: { en: 'Opening + Validation', ar: '1.4 سلام وتحقق الهوية' },
     content: {
-      en: "Hi 🤝, welcome to Jawwy from stc, Kindly provide us name and last 4 digit of ID/IQAMA.",
-      ar: "وعليكم السلام ورحمة الله وبركاته🤝 في جوّي من stc، ولا عليك امر تزودنا بالاسم وآخر اربعة أرقام من الهوية او الاقامة"
+      en: "Hi 🤝, welcome to Jawwy from stc. Kindly provide us owner name and last 4 digit of ID/Iqama.",
+      ar: "وعليكم السلام ورحمة الله وبركاته🤝 في جوّي من stc، ولا عليك امر تزودنا بالاسم وآخر اربعة أرقام من الهوية او الاقامة لمالك الرقم."
     },
-    tags: ['greeting', 'validation']
+    tags: ['validation', 'identity']
+  },
+  {
+    id: 'g_5',
+    category: Category.Greetings,
+    title: { en: 'Opening + Order No.', ar: '1.7 سلام ورقم الطلب' },
+    content: {
+      en: "Hi 🤝, welcome to Jawwy from stc. Kindly provide us your order number.",
+      ar: "وعليكم السلام ورحمة الله وبركاته🤝 في جوّي من stc، ولا عليك أمر زودنا برقم الطلب يا غالي."
+    },
+    tags: ['order', 'opening']
+  },
+  {
+    id: 'g_6',
+    category: Category.Greetings,
+    title: { en: 'Opening + Screenshot', ar: '1.8 سلام وصورة المشكلة' },
+    content: {
+      en: "Hi 🤝, welcome to Jawwy from stc. Rest assured that I will do my best to resolve the issue. 👍🏼 Kindly provide us a screenshot of the problem.",
+      ar: "وعليكم السلام ورحمة الله وبركاته🤝 في جوّي من stc، نعتذر منك على اللي صار معك 🙏 راح نسوي أفضل ما عندنا لمساعدتك، زودنا بصورة شاشة توضح المشكلة يا غالي."
+    },
+    tags: ['problem', 'screenshot']
+  },
+  {
+    id: 'g_7',
+    category: Category.Greetings,
+    title: { en: 'Opening + Join/Add', ar: '1.9 سلام وطلب إضافة' },
+    content: {
+      en: "Hi 🤝, welcome to Jawwy from stc. Please provide us with the following information by copying and filling out the message:\n\nPrimary number:\nNumber you wish to add:",
+      ar: "وعليكم السلام ورحمة الله وبركاته🤝 في جوّي من stc، أرجو تزويدنا بالمعلومات عن طريق نسخ الرسالة وتعبأتها:\n\nالرقم الأساسي:\nالرقم إلي حاب تضيفه:"
+    },
+    tags: ['join', 'add_number']
   },
 
   // --- SIM & SERVICES ---
@@ -58,40 +88,40 @@ export const TEMPLATES: Template[] = [
   {
     id: 'sim_2',
     category: Category.SIM,
-    title: { en: 'Number Transfer 2.0', ar: 'نقل رقم 2.0' },
-    content: {
-      en: "To transfer your number or create a separate account: In the app, tap your number (top right) > Manage Account > Choose option. Note: All features will be lost upon transfer.",
-      ar: "لنقل رقمك إلى حساب آخر أو إنشاء حساب مستقل: من التطبيق، اضغط على رقمك (أعلى اليمين) > إدارة الحساب > الخيار المناسب. الرقم سيخسر كافة المميزات عند الانتقال."
-    },
-    tags: ['transfer', 'account']
-  },
-  {
-    id: 'sim_3',
-    category: Category.SIM,
-    title: { en: 'eSIM Profile Retrieval', ar: 'الشريحة المدمجة 2.0' },
+    title: { en: 'eSIM Profile (App)', ar: 'الشريحة المدمجة من التطبيق' },
     content: {
       en: "To get your eSIM barcode: Open App > Tap number (top right) > Profile > View eSIM Profile.",
-      ar: "تقدر تحمل الباركود الخاص بشريحتك من التطبيق: افتح التطبيق > رقمك (أعلى اليمين) > الملف الشخصي > عرض ملف تعريف الشريحة eSIM."
+      ar: "عزيزي تقدر تحمل الباركود الخاص بشريحتك من خلال التطبيق: افتح التطبيق > اضغط على رقمك (أعلى اليمين) > الملف الشخصي > عرض ملف تعريف الشريحة eSIM."
     },
     tags: ['esim', 'barcode']
   },
   {
+    id: 'sim_3',
+    category: Category.SIM,
+    title: { en: 'eSIM vs Regular', ar: 'الفرق بين العادية والمدمجة' },
+    content: {
+      en: "Regular SIM is physical. eSIM is a digital code added to your device.",
+      ar: "عزيزي الشريحة العادية هي الشريحة البلاستيكية الملموسة، أما الشريحة المدمجة عبارة عن رمز وكود يتم إضافته إلى الجهاز."
+    },
+    tags: ['esim', 'info']
+  },
+  {
     id: 'sim_4',
     category: Category.SIM,
-    title: { en: 'Mawjood Service', ar: 'موجود' },
+    title: { en: 'Mawjood Service', ar: 'خدمة موجود' },
     content: {
       en: "To activate Mawjood (free): Dial *62*4000#. To cancel: Dial #62#.",
-      ar: "تبي تفعل خدمة موجود المجانية؟ اتصل☎️ على الكود: *62*4000# وللإلغاء استخدم الكود: #62#"
+      ar: "تبي تفعل خدمة موجود المجانية؟ كل اللي عليك تتصل☎️ على الكود: *62*4000# ولو حبيت تلغيها في أي وقت، استخدم الكود: #62#"
     },
     tags: ['service', 'mawjood']
   },
   {
     id: 'sim_5',
     category: Category.SIM,
-    title: { en: 'Call Waiting', ar: 'انتظار مكالمات' },
+    title: { en: 'Call Waiting', ar: 'انتظار المكالمات' },
     content: {
-      en: "To activate Call Waiting: Dial *43#. To cancel: Dial #43#.",
-      ar: "تقدر تفعّل خدمة انتظار المكالمات المجانية بالاتصال☎️ على الكود: *#43 وللإلغاء: #43#"
+      en: "To activate: Dial *43#. To cancel: Dial #43#.",
+      ar: "تقدر تفعّل خدمة انتظار المكالمات المجانية بالاتصال☎️ على الكود: *#43 ولو حبيت تلغي الخدمة، استخدم الكود: #43#"
     },
     tags: ['service', 'waiting']
   },
@@ -100,8 +130,8 @@ export const TEMPLATES: Template[] = [
     category: Category.SIM,
     title: { en: 'Replacement SIM 2.0', ar: 'بديلة 2.0' },
     content: {
-      en: "Get a replacement via app: Log out > Get new SIM > Replace SIM. Price: 28.75 SAR (inc. VAT). Verification required via ID/Iqama.",
-      ar: "بإمكانك الحصول على شريحة بديلة من تطبيق جوّي 2.0: سجل خروج > الحصول على شريحة جديدة > استبدال الشريحة. السعر 28.75 ريال شامل الضريبة."
+      en: "App > Log out > Get new SIM > Replace SIM. Price: 28.75 SAR (inc. VAT). Verification required via ID/Iqama.",
+      ar: "بإمكانك الحصول على شريحة بديلة من تطبيق جوّي 2.0: سجل خروج > الحصول على شريحة جديدة > استبدال الشريحة. السعر 28.75 ريال شامل الضريبة ويجب التوثيق بالهوية."
     },
     tags: ['replacement', 'sim']
   },
@@ -110,7 +140,7 @@ export const TEMPLATES: Template[] = [
     category: Category.SIM,
     title: { en: 'Ownership Transfer 2.0', ar: 'نقل الملكية 2.0' },
     content: {
-      en: "Steps: App > Manage Account > More Options > Transfer Ownership. Note: New owner needs another registered number. Or both visit an stc branch with IDs.",
+      en: "App > Manage Account > More Options > Transfer Ownership. Note: New owner needs another registered number or visit stc branch.",
       ar: "لنقل الملكية: تطبيق جوي 2.0 > إدارة الحساب > المزيد > نقل الملكية. ملاحظة: المالك الجديد يحتاج رقم مسجل بهويته، أو زيارة فرع stc مع الهوية."
     },
     tags: ['ownership', 'transfer']
@@ -118,106 +148,116 @@ export const TEMPLATES: Template[] = [
   {
     id: 'sim_8',
     category: Category.SIM,
-    title: { en: 'Social Media List', ar: 'تطبيقات السوشال' },
+    title: { en: 'Social Media Apps', ar: 'تطبيقات السوشال ميديا' },
     content: {
-      en: "Social media includes: YouTube, Facebook, Snapchat, Telegram, WhatsApp, Jaco. Other apps (Google, TikTok, etc.) require general data.",
-      ar: "السوشال ميديا تشمل: [يوتيوب، فيسبوك، سناب شات، تيلجرام، واتساب، جاكو] فقط. البرامج الأخرى تحتاج قيقا عام."
+      en: "Social media includes: [YouTube, Facebook, Snapchat, Telegram, WhatsApp, Jaco] only. Other apps like TikTok or Google require general data.",
+      ar: "أحب أوضح لك أن السوشال ميديا تشمل: [يوتيوب، فيسبوك، سناب شات، تيلجرام، واتساب، جاكو] فقط. البرامج الأخرى مثل تيك توك وبثوث قوقل تحتاج قيقا عام."
     },
     tags: ['social', 'data']
   },
   {
     id: 'sim_9',
     category: Category.SIM,
-    title: { en: 'Delivery Schedule', ar: 'توصيل الشرائح' },
+    title: { en: 'Delivery Times', ar: 'أوقات توصيل الشرائح' },
     content: {
-      en: "Delivery in 48h. Sun-Thu: 9 AM-12 AM. Fri: 2 PM-12 AM. Sat: 11 AM-12 AM.",
-      ar: "توصيل الشرائح العادية خلال 48 ساعة. الأحد-الخميس (9ص-12م)، الجمعة (2ظ-12م)، السبت (11ص-12م)."
+      en: "Delivery within 48h.\nSun-Thu: 9 AM - 12 AM\nFri: 2 PM - 12 AM\nSat: 11 AM - 12 AM",
+      ar: "توصيل الشرائح العادية يكون خلال 48 ساعة.\nأوقات التوصيل:\nالأحد - الخميس (9ص - 12م)\nالجمعة (2ظ - 12م)\nالسبت (11ص - 12م)"
     },
     tags: ['delivery', 'time']
   },
-
-  // --- QUERY (FORMERLY BILLING) ---
   {
-    id: 'bill_1',
+    id: 'sim_10',
+    category: Category.SIM,
+    title: { en: '1.0 to 2.0 Migration', ar: 'الانتقال من 1.0 إلى 2.0' },
+    content: {
+      en: "The Jawwy team is currently migrating all numbers to version 2.0. You will be notified soon. You can also move to Sawa then back to Jawwy to get 2.0 immediately with compensation.",
+      ar: "فريق جوّي يعمل حاليًا على نقل جميع الأرقام إلى الإصدار الجديد 2.0، وسيتم نقل رقمك قريبًا. يمكنك تغيير باقتك إلى سوا ثم العودة لجوّي لتصبح 2.0 فوراً وسيتم تعويضك."
+    },
+    tags: ['migration', 'update']
+  },
+
+  // --- QUERY & BILLING ---
+  {
+    id: 'q_1',
+    category: Category.Query,
+    title: { en: 'Usage/Consumption', ar: 'الاستهلاك طبيعي' },
+    content: {
+      en: "Based on review, your consumption is normal (100% accurate based on your usage).",
+      ar: "اعتذر منك عزيزي وفقاً للمراجعة، الاستهلاك الخاص بالباقة طبيعي 100% حسب استخدامك له ولا توجد ملاحظات."
+    },
+    tags: ['usage', 'billing']
+  },
+  {
+    id: 'q_2',
     category: Category.Query,
     title: { en: 'International Calls 2.0', ar: 'مكالمات دولية 2.0' },
     content: {
-      en: "To make international calls: App > Top-up > Balance Control > Access local usage balance.",
+      en: "App > Top-up > Balance Control > Access local usage balance.",
       ar: "لإجراء المكالمات الدولية: تطبيق جوي 2.0 > شحن الرصيد > التحكم بالرصيد > الوصول إلى رصيد الاستخدام المحلي."
     },
-    tags: ['query', 'intl']
+    tags: ['intl', 'calls']
   },
   {
-    id: 'bill_2',
+    id: 'q_3',
     category: Category.Query,
     title: { en: 'No Credit Calls', ar: 'مكالمات عبر الرصيد' },
     content: {
       en: "In Jawwy, you cannot call directly using credit. You must have an active bundle/add-on with local minutes.",
-      ar: "نعتذر منك، لا يمكن إجراء المكالمات باستخدام الرصيد مباشرة. يجب توفر باقة أو إضافة تحتوي على دقائق اتصال."
+      ar: "نعتذر منك، لا يمكن في جوّي إجراء المكالمات باستخدام الرصيد مباشرة. يجب أن يتوفر لديك باقة أو إضافة تحتوي على دقائق اتصال محلية."
     },
-    tags: ['query', 'credit']
+    tags: ['credit', 'calls']
   },
   {
-    id: 'bill_3',
+    id: 'q_4',
+    category: Category.Query,
+    title: { en: 'Bundle Cancellation', ar: 'شروط إلغاء الباقة' },
+    content: {
+      en: "Cancellation Rules: Within 48h, no usage. Credit returns to Jawwy wallet. Agree?",
+      ar: "شروط إلغاء الباقة:\n- مامر عليها 48 ساعة.\n- ماعليها اي استهلاك.\nعلماً بأن الرصيد يرجع لمحفظة جوي. موافق؟"
+    },
+    tags: ['cancel', 'refund']
+  },
+  {
+    id: 'q_5',
     category: Category.Query,
     title: { en: 'Buy Bundle 2.0', ar: 'شراء باقة 2.0' },
     content: {
       en: "App > Store > Choose (Bundles/Offers) > Select Bundle > Buy Now.",
       ar: "لشراء باقة: المتجر > اختر القسم (باقات - عروض) > حدد الباقة > شراء الآن."
     },
-    tags: ['store', 'bundle']
-  },
-  {
-    id: 'bill_4',
-    category: Category.Query,
-    title: { en: 'Normal Consumption', ar: 'استهلاك طبيعي' },
-    content: {
-      en: "Consumption is reviewed and normal (100% accurate based on usage).",
-      ar: "اعتذر منك، الاستهلاك الخاص بالباقة طبيعي 100% حسب استخدامك ولا توجد ملاحظات."
-    },
-    tags: ['query', 'usage']
-  },
-  {
-    id: 'bill_5',
-    category: Category.Query,
-    title: { en: 'Cancellation Rules', ar: 'الغاء باقة' },
-    content: {
-      en: "Rules: Within 48h, no usage. Balance returns to Jawwy wallet. Agree?",
-      ar: "شروط الإلغاء: مامر عليها 48 ساعة، ماعليها استهلاك. الرصيد يرجع لمحفظة جوي. موافق؟"
-    },
-    tags: ['query', 'cancel']
+    tags: ['store', 'buy']
   },
 
   // --- TECHNICAL ---
   {
     id: 'tech_1',
     category: Category.Technical,
-    title: { en: 'System Update Info', ar: 'تحديث على النظام' },
+    title: { en: 'System Update', ar: 'تحديث على النظام' },
     content: {
       en: "Apologies, system updates are currently in progress. Please try again later. We appreciate your patience.🧡🙏",
-      ar: "نعتذر منك، في الوقت الحالي يوجد تحديث على النظام. نرجو منك المحاولة لاحقًا، شكرًا لتفهمك.🧡🙏"
+      ar: "نعتذر منك، في الوقت الحالي يوجد تحديث على النظام. نرجو منك المحاولة لاحقًا، فريقنا يعمل بجهد لحل المشكلة.🧡🙏"
     },
     tags: ['tech', 'update']
   },
   {
     id: 'tech_2',
     category: Category.Technical,
-    title: { en: 'Coverage Map 1', ar: 'تغطية 1' },
+    title: { en: 'Coverage Check', ar: 'التغطية والشبكة' },
     content: {
-      en: "Check coverage: stc.sa. Provide location coordinates (from Google Maps brackets).",
-      ar: "تأكد من التغطية عبر رابط stc. وزودنا بإحداثيات الموقع (بين القوسين في قوقل ماب)."
+      en: "Check coverage: stc.sa. Provide location coordinates (found in brackets in Google Maps).",
+      ar: "تأكد من التغطية عبر الرابط: stc.sa وزودنا بإحداثيات الموقع (تحصلها في قوقل ماب مكتوبة بين قوسين)."
     },
-    tags: ['tech', 'coverage']
+    tags: ['coverage', 'signal']
   },
   {
     id: 'tech_3',
     category: Category.Technical,
-    title: { en: 'Enable SMS 2.0', ar: 'رسائل نصية 2.0' },
+    title: { en: 'Enable SMS 2.0', ar: 'تفعيل الرسائل النصية' },
     content: {
       en: "App > Balance > Balance Control > Allow local usage balance.",
-      ar: "لارسال رسائل: تطبيق جوي 2.0 > الرصيد > التحكم بالرصيد > السماح لرصيد الاستخدام."
+      ar: "لارسال رسائل: تطبيق جوي 2.0 > الرصيد > التحكم بالرصيد > السماح لرصيد الاستخدام محلياً."
     },
-    tags: ['tech', 'sms']
+    tags: ['sms', 'settings']
   },
   {
     id: 'tech_4',
@@ -227,38 +267,38 @@ export const TEMPLATES: Template[] = [
       en: "Close WiFi and use Jawwy data only when using the app.",
       ar: "تأكد من إغلاق الواي فاي واستخدام بيانات جوي فقط أثناء استخدام التطبيق."
     },
-    tags: ['tech', 'wifi']
+    tags: ['wifi', 'app']
   },
   {
     id: 'tech_5',
     category: Category.Technical,
-    title: { en: 'High Consumption Reason', ar: 'استهلاك عالي' },
+    title: { en: 'High Consumption Reason', ar: 'سبب الاستهلاك العالي' },
     content: {
-      en: "High-quality video, OS updates, and 5G consume data significantly. Calculated per 1MB.",
-      ar: "للتوضيح: الفيديوهات عالية الجودة، تحديثات النظام، وقوقل ماب تستهلك البيانات بشكل كبير. الـ 5G يستهلك أكثر من الـ 4G."
+      en: "High-quality video, OS updates, and 5G consume data significantly. Data is calculated per 1MB.",
+      ar: "للتوضيح: الفيديوهات عالية الجودة، تحديثات النظام، والـ 5G يستهلكون البيانات بشكل كبير. طريقة الاحتساب تكون بالـ 1 ميجابايت."
     },
-    tags: ['tech', 'usage']
+    tags: ['usage', 'data']
   },
 
   // --- CLOSING ---
   {
     id: 'c_1',
     category: Category.Closing,
-    title: { en: 'Task Completed', ar: 'تم تنفيذ طلبك' },
+    title: { en: 'Task Completed', ar: 'تم تنفيذ الطلب' },
     content: {
       en: "Request executed. Is there anything else I can help you with?",
-      ar: "تم التنفيذ يا غالي ، هل أقدر أساعدك بشي آخر؟"
+      ar: "تم التنفيذ يا غالي، هل أقدر أساعدك بشي آخر؟"
     },
-    tags: ['closing', 'done']
+    tags: ['done', 'closing']
   },
   {
     id: 'c_2',
     category: Category.Closing,
     title: { en: 'Final Closing', ar: 'إنهاء المحادثة' },
     content: {
-      en: "Thank you for contacting Jawwy Care today.🧡🙏",
+      en: "Thank you for contacting the Jawwy Care team today.🧡🙏",
       ar: "😊 شكراً لتواصلك معنا وتشرفنا بخدمتك، وتسعدنا مشاركتك بالتقييم🙏"
     },
-    tags: ['closing', 'feedback']
+    tags: ['feedback', 'end']
   }
 ];
