@@ -106,12 +106,11 @@ const GuidePage: React.FC<GuidePageProps> = ({ onBack }) => {
               <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">قم بتحميل الكود المصدري للمشروع أولاً ليتم تثبيته في المتصفح.</p>
               <a 
                 href="https://www.hostize.com/s/1C7QeaQwWy" 
-                onClick={(e) => {
-                   e.preventDefault();
-                   alert('سيتم بدء التحميل تلقائياً عند توفر الرابط المباشر من النظام.');
-                }}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-all active:scale-95 shadow-lg shadow-blue-500/20"
               >
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" /></svg>
                 تحميل ملف المشروع (ZIP)
               </a>
             </div>
