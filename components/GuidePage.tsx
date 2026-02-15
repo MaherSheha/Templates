@@ -105,7 +105,7 @@ const GuidePage: React.FC<GuidePageProps> = ({ onBack }) => {
               <h4 className="font-black text-lg text-slate-900 dark:text-white mb-1">الخطوة الأولى: تحميل الملف</h4>
               <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">قم بتحميل الكود المصدري للمشروع أولاً ليتم تثبيته في المتصفح.</p>
               <a 
-                href="#" 
+                href="https://www.hostize.com/s/1C7QeaQwWy" 
                 onClick={(e) => {
                    e.preventDefault();
                    alert('سيتم بدء التحميل تلقائياً عند توفر الرابط المباشر من النظام.');
