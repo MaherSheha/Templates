@@ -105,7 +105,7 @@ const GuidePage: React.FC<GuidePageProps> = ({ onBack }) => {
               <h4 className="font-black text-lg text-slate-900 dark:text-white mb-1">الخطوة الأولى: تحميل الملف</h4>
               <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">قم بتحميل الكود المصدري للمشروع أولاً ليتم تثبيته في المتصفح.</p>
               <a 
-                href="https://www.hostize.com/s/1C7QeaQwWy" 
+                href="https://drive.google.com/file/d/1CTFcUA_7ZtnEwIbvrIcfIyYhuKudpxrz/view?usp=sharing" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-all active:scale-95 shadow-lg shadow-blue-500/20"
