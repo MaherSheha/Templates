@@ -44,6 +44,7 @@ const App: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<string | 'All'>('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [editingTemplate, setEditingTemplate] = useState<Template | null>(null);
   const [isPhoneModalOpen, setIsPhoneModalOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [currentView, setCurrentView] = useState<'templates' | 'guide'>('templates');
@@ -102,11 +103,18 @@ const App: React.FC = () => {
 
   const toggleTheme = () => setTheme(prev => prev === 'light' ? 'dark' : 'light');
 
-  const handleAddTemplate = (newTemplate: Template) => {
-    const updated = [newTemplate, ...customTemplates];
-    setCustomTemplates(updated);
-    storage.set('custom_templates', updated); // Instant save
-    showToast('تم حفظ القالب بنجاح ✨');
+  const handleSaveTemplate = (template: Template) => {
+    if (editingTemplate) {
+      const updated = customTemplates.map(t => t.id === template.id ? template : t);
+      setCustomTemplates(updated);
+      showToast('تم تحديث القالب ✅');
+    } else {
+      const updated = [template, ...customTemplates];
+      setCustomTemplates(updated);
+      showToast('تم حفظ القالب بنجاح ✨');
+    }
+    setIsCreateModalOpen(false);
+    setEditingTemplate(null);
   };
 
   const handleDeleteTemplate = (id: string) => {
@@ -116,6 +124,11 @@ const App: React.FC = () => {
       storage.set('custom_templates', updated); // Instant save
       showToast('تم حذف القالب');
     }
+  };
+
+  const openEditModal = (template: Template) => {
+    setEditingTemplate(template);
+    setIsCreateModalOpen(true);
   };
 
   const handleExport = () => {
@@ -185,7 +198,7 @@ const App: React.FC = () => {
       )}
 
       {/* Navigation Header */}
-      <nav id="navbar" className="sticky top-0 z-[60] h-[64px] md:h-[72px] bg-white dark:bg-[#1e293b] border-b border-slate-100 dark:border-slate-800 px-4 flex items-center shadow-sm">
+      <nav id="navbar" className="sticky top-0 z-[60] h-[64px] md:h-[72px] bg-white dark:bg-[#1e293b] border-b border-slate-200 dark:border-slate-800 px-4 flex items-center shadow-sm transition-colors duration-300">
         <div className="max-w-6xl mx-auto w-full flex items-center justify-between">
           <div className="flex items-center gap-2 md:gap-3">
             <button 
@@ -207,7 +220,7 @@ const App: React.FC = () => {
                 className={`w-10 h-10 flex items-center justify-center rounded-2xl transition-all active:scale-95 font-black text-xl shadow-lg ${
                   currentView === 'guide' 
                     ? 'bg-blue-600 text-white shadow-blue-500/30' 
-                    : 'bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-blue-600 shadow-transparent'
+                    : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 shadow-transparent'
                 }`}
                 title="دليل الاستخدام"
             >
@@ -216,17 +229,17 @@ const App: React.FC = () => {
 
             <button 
                 onClick={() => setIsPhoneModalOpen(true)}
-                className="flex items-center gap-2 px-3 py-2 rounded-xl bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400 font-bold text-sm transition-all hover:bg-blue-100 dark:hover:bg-blue-900/40 active:scale-95"
+                className="flex items-center gap-2 px-3 py-2 rounded-xl bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400 font-bold text-sm transition-all hover:bg-blue-100 dark:hover:bg-blue-900/40 active:scale-95 border border-blue-100 dark:border-transparent"
             >
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
                 <span className="hidden sm:inline">الأدوات</span>
             </button>
 
-            <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl">
-              <button onClick={handleExport} className="p-2 text-slate-500 hover:text-blue-600 transition-colors" title="تصدير نسخة احتياطية">
+            <div className="flex items-center gap-1 bg-slate-50 dark:bg-slate-800/50 p-1 rounded-xl border border-slate-200 dark:border-slate-700">
+              <button onClick={handleExport} className="p-2 text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors" title="تصدير نسخة احتياطية">
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
               </button>
-              <label className="p-2 text-slate-500 hover:text-blue-600 transition-colors cursor-pointer" title="استيراد نسخة احتياطية">
+              <label className="p-2 text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-pointer" title="استيراد نسخة احتياطية">
                 <input type="file" accept=".json" onChange={handleImport} className="hidden" />
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
               </label>
@@ -239,7 +252,7 @@ const App: React.FC = () => {
         {currentView === 'templates' ? (
           <>
             {/* Category Selector Bar */}
-            <div className="sticky top-[64px] md:top-[72px] z-50 bg-slate-50 dark:bg-[#0f172a] pt-0 pb-4">
+            <div className="sticky top-[64px] md:top-[72px] z-50 bg-slate-50 dark:bg-[#0f172a] pt-0 pb-4 transition-colors duration-300">
               <div className="relative group max-w-md pt-3">
                 <select
                   value={activeCategory}
@@ -270,10 +283,11 @@ const App: React.FC = () => {
                     template={template} 
                     language={language} 
                     onDelete={customTemplates.some(ct => ct.id === template.id) ? () => handleDeleteTemplate(template.id) : undefined}
+                    onEdit={customTemplates.some(ct => ct.id === template.id) ? () => openEditModal(template) : undefined}
                   />
                 ))
               ) : (
-                <div className="col-span-full py-24 text-center bg-white dark:bg-slate-900/50 rounded-3xl border border-dashed border-slate-200 dark:border-slate-800">
+                <div className="col-span-full py-24 text-center bg-white dark:bg-slate-900/50 rounded-3xl border border-dashed border-slate-200 dark:border-slate-800 shadow-sm">
                   <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-slate-50 dark:bg-slate-800 text-slate-300 mb-4">
                      <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                   </div>
@@ -302,8 +316,8 @@ const App: React.FC = () => {
 
       {/* Fixed Action Bar at the Bottom */}
       <div className="fixed bottom-0 inset-x-0 z-[70] px-4 pb-6 md:pb-8">
-        <div className="max-w-2xl mx-auto bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl border border-slate-200 dark:border-slate-700 rounded-3xl p-2 shadow-2xl flex items-center gap-2">
-          <button onClick={() => setIsCreateModalOpen(true)} className="w-12 h-12 flex items-center justify-center shrink-0 bg-blue-600 text-white rounded-2xl shadow-lg shadow-blue-500/30 hover:bg-blue-700 transition-all active:scale-90" aria-label="إضافة قالب">
+        <div className="max-w-2xl mx-auto bg-white/95 dark:bg-slate-800/90 backdrop-blur-xl border border-slate-200 dark:border-slate-700 rounded-3xl p-2 shadow-2xl flex items-center gap-2 transition-colors duration-300">
+          <button onClick={() => { setEditingTemplate(null); setIsCreateModalOpen(true); }} className="w-12 h-12 flex items-center justify-center shrink-0 bg-blue-600 text-white rounded-2xl shadow-lg shadow-blue-500/30 hover:bg-blue-700 transition-all active:scale-90" aria-label="إضافة قالب">
             <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M12 4v16m8-8H4" /></svg>
           </button>
           
@@ -323,7 +337,7 @@ const App: React.FC = () => {
             </div>
           </div>
 
-          <button onClick={toggleTheme} className="w-12 h-12 flex items-center justify-center shrink-0 bg-slate-50 dark:bg-slate-700 text-slate-500 dark:text-slate-300 rounded-2xl hover:bg-slate-100 dark:hover:bg-slate-600 transition-all active:scale-90" aria-label="تبديل الوضع الليلي">
+          <button onClick={toggleTheme} className="w-12 h-12 flex items-center justify-center shrink-0 bg-slate-50 dark:bg-slate-700 text-slate-500 dark:text-slate-300 rounded-2xl hover:bg-slate-100 dark:hover:bg-slate-600 transition-all active:scale-90 border border-slate-100 dark:border-transparent" aria-label="تبديل الوضع الليلي">
             {isDark ? (
               <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 9H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" /></svg>
             ) : (
@@ -335,10 +349,11 @@ const App: React.FC = () => {
 
       <CreateTemplateModal 
         isOpen={isCreateModalOpen} 
-        onClose={() => setIsCreateModalOpen(false)} 
-        onSave={handleAddTemplate} 
+        onClose={() => { setIsCreateModalOpen(false); setEditingTemplate(null); }} 
+        onSave={handleSaveTemplate} 
         language={language}
         existingCategories={categories}
+        templateToEdit={editingTemplate}
       />
 
       <PhoneProcessorModal 
