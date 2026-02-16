@@ -6,9 +6,10 @@ interface TemplateCardProps {
   template: Template;
   language: Language;
   onDelete?: () => void;
+  onEdit?: () => void;
 }
 
-const TemplateCard: React.FC<TemplateCardProps> = ({ template, language, onDelete }) => {
+const TemplateCard: React.FC<TemplateCardProps> = ({ template, language, onDelete, onEdit }) => {
   const [copiedAr, setCopiedAr] = useState(false);
   const [copiedEn, setCopiedEn] = useState(false);
 
@@ -47,22 +48,40 @@ const TemplateCard: React.FC<TemplateCardProps> = ({ template, language, onDelet
         </div>
       </div>
 
-      {/* Floating Delete Button: Always visible for custom templates but with low opacity by default */}
-      {onDelete && (
-        <button 
-          onClick={(e) => { 
-            e.preventDefault();
-            e.stopPropagation(); 
-            onDelete(); 
-          }}
-          className="absolute top-2 left-2 z-[50] p-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur-md text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/40 rounded-xl transition-all opacity-40 group-hover:opacity-100 border border-slate-200 dark:border-slate-700 shadow-sm active:scale-90"
-          title="حذف القالب"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-5 md:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-          </svg>
-        </button>
-      )}
+      {/* Floating Action Buttons: Edit and Delete */}
+      <div className="absolute top-2 left-2 z-[50] flex flex-col gap-1.5 opacity-40 group-hover:opacity-100 transition-all">
+        {onEdit && (
+          <button 
+            onClick={(e) => { 
+              e.preventDefault();
+              e.stopPropagation(); 
+              onEdit(); 
+            }}
+            className="p-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur-md text-slate-400 hover:text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/40 rounded-xl transition-all border border-slate-200 dark:border-slate-700 shadow-sm active:scale-90"
+            title="تعديل القالب"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-5 md:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+            </svg>
+          </button>
+        )}
+        
+        {onDelete && (
+          <button 
+            onClick={(e) => { 
+              e.preventDefault();
+              e.stopPropagation(); 
+              onDelete(); 
+            }}
+            className="p-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur-md text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/40 rounded-xl transition-all border border-slate-200 dark:border-slate-700 shadow-sm active:scale-90"
+            title="حذف القالب"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-5 md:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+            </svg>
+          </button>
+        )}
+      </div>
 
       {/* 2. Hover Content Overlay */}
       <div className="absolute inset-x-0 top-0 h-[calc(100%-60px)] md:h-[calc(100%-70px)] bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 z-20 flex items-center justify-center p-3 md:p-4 pointer-events-none group-hover:pointer-events-auto">
