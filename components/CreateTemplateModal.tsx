@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Language, Category, Template } from '../types';
 
 interface CreateTemplateModalProps {
@@ -8,9 +8,17 @@ interface CreateTemplateModalProps {
   onSave: (template: Template) => void;
   language: Language;
   existingCategories: string[];
+  templateToEdit?: Template | null;
 }
 
-const CreateTemplateModal: React.FC<CreateTemplateModalProps> = ({ isOpen, onClose, onSave, language, existingCategories }) => {
+const CreateTemplateModal: React.FC<CreateTemplateModalProps> = ({ 
+  isOpen, 
+  onClose, 
+  onSave, 
+  language, 
+  existingCategories,
+  templateToEdit
+}) => {
   const [step, setStep] = useState(1);
   const [isCustomCategory, setIsCustomCategory] = useState(false);
   const [formData, setFormData] = useState({
@@ -22,6 +30,36 @@ const CreateTemplateModal: React.FC<CreateTemplateModalProps> = ({ isOpen, onClo
     customCategory: '',
     tags: ''
   });
+
+  // Populate form if editing
+  useEffect(() => {
+    if (templateToEdit && isOpen) {
+      setFormData({
+        titleEn: templateToEdit.title.en,
+        titleAr: templateToEdit.title.ar,
+        contentEn: templateToEdit.content.en,
+        contentAr: templateToEdit.content.ar,
+        category: templateToEdit.category,
+        customCategory: '',
+        tags: templateToEdit.tags.join(', ')
+      });
+      setIsCustomCategory(false);
+      setStep(1);
+    } else if (!templateToEdit && isOpen) {
+      // Reset for new template
+      setFormData({
+        titleEn: '',
+        titleAr: '',
+        contentEn: '',
+        contentAr: '',
+        category: Category.Greetings as string,
+        customCategory: '',
+        tags: ''
+      });
+      setIsCustomCategory(false);
+      setStep(1);
+    }
+  }, [templateToEdit, isOpen]);
 
   if (!isOpen) return null;
 
@@ -47,7 +85,7 @@ const CreateTemplateModal: React.FC<CreateTemplateModalProps> = ({ isOpen, onClo
     const finalCategory = isCustomCategory ? formData.customCategory.trim() : formData.category;
 
     const newTemplate: Template = {
-      id: `custom_${Date.now()}`,
+      id: templateToEdit ? templateToEdit.id : `custom_${Date.now()}`,
       category: finalCategory,
       title: {
         en: formData.titleEn.trim() || formData.titleAr,
@@ -61,18 +99,6 @@ const CreateTemplateModal: React.FC<CreateTemplateModalProps> = ({ isOpen, onClo
     };
 
     onSave(newTemplate);
-    // Reset
-    setFormData({
-      titleEn: '',
-      titleAr: '',
-      contentEn: '',
-      contentAr: '',
-      category: Category.Greetings,
-      customCategory: '',
-      tags: ''
-    });
-    setIsCustomCategory(false);
-    setStep(1);
     onClose();
   };
 
@@ -105,7 +131,9 @@ const CreateTemplateModal: React.FC<CreateTemplateModalProps> = ({ isOpen, onClo
         
         <div className="p-5 md:p-6 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-black text-slate-900 dark:text-white">إضافة قالب جديد</h2>
+            <h2 className="text-xl font-black text-slate-900 dark:text-white">
+              {templateToEdit ? 'تعديل القالب' : 'إضافة قالب جديد'}
+            </h2>
             <button onClick={onClose} className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -264,7 +292,7 @@ const CreateTemplateModal: React.FC<CreateTemplateModalProps> = ({ isOpen, onClo
                   canGoNext() ? 'bg-green-600 hover:bg-green-700 shadow-lg shadow-green-500/20' : 'bg-slate-300 dark:bg-slate-700 cursor-not-allowed'
                 }`}
               >
-                حفظ القالب
+                {templateToEdit ? 'تعديل وحفظ' : 'حفظ القالب'}
               </button>
             )}
           </div>
